@@ -42,6 +42,19 @@ config TARGET_AM57XX_EVM
 	imply SPL_THERMAL
 	imply TI_DRA7_THERMAL
 
+config TARGET_BEAGLEBONEAI
+	bool "BEAGLEBONEAI"
+	select BOARD_LATE_INIT
+	select CMD_DDR3
+	select DRA7XX
+	select TI_I2C_BOARD_DETECT
+	select SUPPORT_EXTENSION_SCAN
+	imply DM_THERMAL
+	imply SCSI
+	imply SPL_THERMAL
+	imply TI_DRA7_THERMAL
+
+
 endchoice
 
 config SYS_SOC
@@ -64,7 +77,7 @@ config OMAP_PLATFORM_RESET_TIME_MAX_USEC
 	  3: Voltage ramp time, which can be derived using the PMIC slew rate
 	     and value of voltage ramp needed.
 
-if TARGET_DRA7XX_EVM || TARGET_AM57XX_EVM
+if TARGET_DRA7XX_EVM || TARGET_AM57XX_EVM || TARGET_BEAGLEBONEAI
 menu "Voltage Domain OPP selections"
 
 choice
@@ -160,5 +173,6 @@ endif
 source "board/ti/omap5_uevm/Kconfig"
 source "board/ti/dra7xx/Kconfig"
 source "board/ti/am57xx/Kconfig"
+source "board/ti/beagleboneai/Kconfig"
 
 endif
